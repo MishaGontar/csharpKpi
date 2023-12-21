@@ -1,0 +1,15 @@
+C:\Users\Мішаня\RiderProjects\netFramework8\BLL\bin\Debug\net8.0\BLL.deps.json
+C:\Users\Мішаня\RiderProjects\netFramework8\BLL\bin\Debug\net8.0\BLL.dll
+C:\Users\Мішаня\RiderProjects\netFramework8\BLL\bin\Debug\net8.0\BLL.pdb
+C:\Users\Мішаня\RiderProjects\netFramework8\BLL\bin\Debug\net8.0\DLL.dll
+C:\Users\Мішаня\RiderProjects\netFramework8\BLL\bin\Debug\net8.0\DLL.pdb
+C:\Users\Мішаня\RiderProjects\netFramework8\BLL\obj\Debug\net8.0\BLL.csproj.AssemblyReference.cache
+C:\Users\Мішаня\RiderProjects\netFramework8\BLL\obj\Debug\net8.0\BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Мішаня\RiderProjects\netFramework8\BLL\obj\Debug\net8.0\BLL.AssemblyInfoInputs.cache
+C:\Users\Мішаня\RiderProjects\netFramework8\BLL\obj\Debug\net8.0\BLL.AssemblyInfo.cs
+C:\Users\Мішаня\RiderProjects\netFramework8\BLL\obj\Debug\net8.0\BLL.csproj.CoreCompileInputs.cache
+C:\Users\Мішаня\RiderProjects\netFramework8\BLL\obj\Debug\net8.0\BLL.csproj.CopyComplete
+C:\Users\Мішаня\RiderProjects\netFramework8\BLL\obj\Debug\net8.0\BLL.dll
+C:\Users\Мішаня\RiderProjects\netFramework8\BLL\obj\Debug\net8.0\refint\BLL.dll
+C:\Users\Мішаня\RiderProjects\netFramework8\BLL\obj\Debug\net8.0\BLL.pdb
+C:\Users\Мішаня\RiderProjects\netFramework8\BLL\obj\Debug\net8.0\ref\BLL.dll

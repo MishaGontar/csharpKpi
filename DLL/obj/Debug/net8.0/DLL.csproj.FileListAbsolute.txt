@@ -1,0 +1,12 @@
+C:\Users\Мішаня\RiderProjects\netFramework8\DLL\bin\Debug\net8.0\DLL.deps.json
+C:\Users\Мішаня\RiderProjects\netFramework8\DLL\bin\Debug\net8.0\DLL.dll
+C:\Users\Мішаня\RiderProjects\netFramework8\DLL\bin\Debug\net8.0\DLL.pdb
+C:\Users\Мішаня\RiderProjects\netFramework8\DLL\obj\Debug\net8.0\DLL.csproj.AssemblyReference.cache
+C:\Users\Мішаня\RiderProjects\netFramework8\DLL\obj\Debug\net8.0\DLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Мішаня\RiderProjects\netFramework8\DLL\obj\Debug\net8.0\DLL.AssemblyInfoInputs.cache
+C:\Users\Мішаня\RiderProjects\netFramework8\DLL\obj\Debug\net8.0\DLL.AssemblyInfo.cs
+C:\Users\Мішаня\RiderProjects\netFramework8\DLL\obj\Debug\net8.0\DLL.csproj.CoreCompileInputs.cache
+C:\Users\Мішаня\RiderProjects\netFramework8\DLL\obj\Debug\net8.0\DLL.dll
+C:\Users\Мішаня\RiderProjects\netFramework8\DLL\obj\Debug\net8.0\refint\DLL.dll
+C:\Users\Мішаня\RiderProjects\netFramework8\DLL\obj\Debug\net8.0\DLL.pdb
+C:\Users\Мішаня\RiderProjects\netFramework8\DLL\obj\Debug\net8.0\ref\DLL.dll

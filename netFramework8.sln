@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLL", "DLL\DLL.csproj", "{BF62EC60-D5A0-455E-9802-8C9BDD4BDF13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{32FE750A-141F-4EC6-8C64-CD8964B2B101}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PL", "PL\PL.csproj", "{82F05033-945B-4295-9176-868A084E8CAE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF62EC60-D5A0-455E-9802-8C9BDD4BDF13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF62EC60-D5A0-455E-9802-8C9BDD4BDF13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF62EC60-D5A0-455E-9802-8C9BDD4BDF13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF62EC60-D5A0-455E-9802-8C9BDD4BDF13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32FE750A-141F-4EC6-8C64-CD8964B2B101}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32FE750A-141F-4EC6-8C64-CD8964B2B101}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32FE750A-141F-4EC6-8C64-CD8964B2B101}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32FE750A-141F-4EC6-8C64-CD8964B2B101}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82F05033-945B-4295-9176-868A084E8CAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82F05033-945B-4295-9176-868A084E8CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82F05033-945B-4295-9176-868A084E8CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82F05033-945B-4295-9176-868A084E8CAE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
