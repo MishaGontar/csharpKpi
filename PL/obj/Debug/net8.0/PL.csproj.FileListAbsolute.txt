@@ -29,3 +29,4 @@ C:\Users\Мішаня\RiderProjects\netFramework8\PL\obj\Debug\net8.0\refint\PL.
 C:\Users\Мішаня\RiderProjects\netFramework8\PL\obj\Debug\net8.0\PL.pdb
 C:\Users\Мішаня\RiderProjects\netFramework8\PL\obj\Debug\net8.0\PL.genruntimeconfig.cache
 C:\Users\Мішаня\RiderProjects\netFramework8\PL\obj\Debug\net8.0\ref\PL.dll
+C:\Users\Мішаня\RiderProjects\netFramework8\PL\obj\Debug\net8.0\PL.sourcelink.json

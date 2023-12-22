@@ -11,4 +11,5 @@ public interface IReaderService
     void DeleteReader(int id);
     List<Reader> SearchReadersByName(string name);
     List<Reader> SearchReadersByEmail(string email);
+    void getBook(Book book, Reader reader);
 }

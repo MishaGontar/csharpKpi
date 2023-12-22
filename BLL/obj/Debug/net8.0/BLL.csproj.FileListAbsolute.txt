@@ -13,3 +13,4 @@ C:\Users\Мішаня\RiderProjects\netFramework8\BLL\obj\Debug\net8.0\BLL.dll
 C:\Users\Мішаня\RiderProjects\netFramework8\BLL\obj\Debug\net8.0\refint\BLL.dll
 C:\Users\Мішаня\RiderProjects\netFramework8\BLL\obj\Debug\net8.0\BLL.pdb
 C:\Users\Мішаня\RiderProjects\netFramework8\BLL\obj\Debug\net8.0\ref\BLL.dll
+C:\Users\Мішаня\RiderProjects\netFramework8\BLL\obj\Debug\net8.0\BLL.sourcelink.json

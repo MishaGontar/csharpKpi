@@ -56,4 +56,21 @@ public class ReaderService(IRepository<Reader> readerRepository) : IReaderServic
 
         return _readerRepository.Search(r => r.Email.Contains(email)).ToList();
     }
+
+
+    public void getBook(Book book, Reader reader)
+    {
+        ArgumentNullException.ThrowIfNull(book);
+        ArgumentNullException.ThrowIfNull(reader);
+
+        bool isAlreadyExist = reader.GetsBooks.Any(b =>
+            b.Title.Equals(book.Title) && b.Author.Equals(book.Author) && b.Topic.Equals(book.Topic));
+        if (isAlreadyExist)
+            throw new AlreadyGetBook();
+        if (reader.GetsBooks.Count == 10)
+            throw new MoreThanCan();
+
+        reader.GetsBooks.Add(book);
+        Console.WriteLine("Книжку було додано до формулятора.");
+    }
 }

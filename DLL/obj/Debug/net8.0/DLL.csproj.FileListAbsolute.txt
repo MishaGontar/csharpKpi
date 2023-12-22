@@ -10,3 +10,4 @@ C:\Users\Мішаня\RiderProjects\netFramework8\DLL\obj\Debug\net8.0\DLL.dll
 C:\Users\Мішаня\RiderProjects\netFramework8\DLL\obj\Debug\net8.0\refint\DLL.dll
 C:\Users\Мішаня\RiderProjects\netFramework8\DLL\obj\Debug\net8.0\DLL.pdb
 C:\Users\Мішаня\RiderProjects\netFramework8\DLL\obj\Debug\net8.0\ref\DLL.dll
+C:\Users\Мішаня\RiderProjects\netFramework8\DLL\obj\Debug\net8.0\DLL.sourcelink.json
