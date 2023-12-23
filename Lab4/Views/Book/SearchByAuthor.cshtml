@@ -1,0 +1,35 @@
+﻿@model List<DLL2.Book>
+
+<h2>Пошук за автором</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.Label("Автор книги:")
+        @Html.TextBox("author")
+        <input type="submit" value="Пошук" class="btn btn-default" />
+    </div>
+}
+
+
+
+<h3>Результати пошуку:</h3>
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Назва</th>
+        <th>Автор</th>
+        <th>Тематика</th>
+        <th>Кількість</th>
+    </tr>
+    @foreach (var book in Model)
+    {
+        <tr>
+            <td>@book.Id</td>
+            <td>@book.Title</td>
+            <td>@book.Author</td>
+            <td>@book.Topic</td>
+            <td>@book.Quantity</td>
+        </tr>
+    }
+</table>

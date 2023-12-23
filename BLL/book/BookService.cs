@@ -28,7 +28,14 @@ public class BookService(IRepository<Book> bookRepository) : IBookService
     {
         ArgumentNullException.ThrowIfNull(book);
 
-        _bookRepository.Update(book);
+        Book updatedBook = _bookRepository.GetById(book.Id);
+        ArgumentNullException.ThrowIfNull(updatedBook);
+
+        updatedBook.Topic = book.Topic;
+        updatedBook.Quantity = book.Quantity;
+        updatedBook.Author = book.Author;
+
+        _bookRepository.Update(updatedBook);
     }
 
     public void DeleteBook(int id)

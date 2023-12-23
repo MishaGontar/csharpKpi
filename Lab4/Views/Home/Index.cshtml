@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container mt-5">
+    <h1 class="display-4 text-center mb-4">Ласкаво просимо до Системи управління бібліотекою!</h1>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <h3 class="mb-3">Для <b>Книги</b> (Book):</h3>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Дія</th>
+                        <th scope="col">URL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Преглянути всі книги</td>
+                        <td><code>/book</code></td>
+                    </tr>
+                    <tr>
+                        <td>Створити книгу</td>
+                        <td><code>/book/create</code></td>
+                    </tr>
+                    <tr>
+                        <td>Видалити книгу</td>
+                        <td><code>/book/delete/{id}<sup>ід книги</sup></code></td>
+                    </tr>
+                    <tr>
+                        <td>Деталі про книгу</td>
+                        <td><code>/book/details/{id}<sup>ід книги</sup></code></td>
+                    </tr>
+                    <tr>
+                        <td>Редагувати книгу</td>
+                        <td><code>/book/edit/{id}<sup>ід книги</sup></code></td>
+                    </tr>
+                    <tr>
+                        <td>Шукати книгу по автору</td>
+                        <td><code>/book/SearchByAuthor?author=автор</code></td>
+                    </tr>
+                    <tr>
+                        <td>Шукати книгу по назві</td>
+                        <td><code>/book/SearchByTitle?title=назва</code></td>
+                    </tr>
+                    <tr>
+                        <td>Шукати книгу по тематиці</td>
+                        <td><code>/book/SearchByTopic?topic=тематика</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-6">
+            <h3 class="mb-3">Для <b>Читача</b> (Reader):</h3>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Дія</th>
+                        <th scope="col">URL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Преглянути всіх читачів</td>
+                        <td><code>/reader</code></td>
+                    </tr>
+                    <tr>
+                        <td>Видалити читача</td>
+                        <td><code>/reader/delete/{id}<sup>ід читача</sup></code></td>
+                    </tr>
+                    <tr>
+                        <td>Деталі про читача</td>
+                        <td><code>/reader/details/{id}<sup>ід читача</sup></code></td>
+                    </tr>
+                    <tr>
+                        <td>Редагувати читача</td>
+                        <td><code>/reader/edit/{id}<sup>ід читача</sup></code></td>
+                    </tr>
+                    <tr>
+                        <td>Шукати читача по ім'ям</td>
+                        <td><code>/reader/SearchByName?name=ім'я</code></td>
+                    </tr>
+                    <tr>
+                        <td>Шукати читача по емайлу</td>
+                        <td><code>/reader/SearchByEmail?email=ім'я</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

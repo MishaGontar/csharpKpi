@@ -1,0 +1,46 @@
+﻿@model DLL2.Book
+
+<div class="container mt-4">
+    <h2 class="mb-4">Взяти книжку</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Інформація про книгу</h4>
+            <hr/>
+
+            <dl class="row">
+                <dt class="col-sm-3">Id</dt>
+                <dd class="col-sm-9">@Model.Id</dd>
+
+                <dt class="col-sm-3">Назва</dt>
+                <dd class="col-sm-9">@Model.Title</dd>
+
+                <dt class="col-sm-3">Автор</dt>
+                <dd class="col-sm-9">@Model.Author</dd>
+
+                <dt class="col-sm-3">Тематика</dt>
+                <dd class="col-sm-9">@Model.Topic</dd>
+
+                <dt class="col-sm-3">Кількість</dt>
+                <dd class="col-sm-9">@Model.Quantity</dd>
+            </dl>
+
+            @using (Html.BeginForm("GetBook", "Reader", new { bookId = Model.Id }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <label for="readerId" class="form-label">ID Читача</label>
+                    <div class="input-group mb-3">
+                        <input type="number" id="readerId" name="readerId" class="form-control" required/>
+                        <button type="submit" class="btn btn-success">Взяти книжку</button>
+                    </div>
+                </div>
+            }
+
+            <div>
+                <a href="@Url.Action("Index", "Book")" class="btn btn-secondary">Повернутися до списку</a>
+            </div>
+        </div>
+    </div>
+</div>

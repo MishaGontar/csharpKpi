@@ -28,7 +28,12 @@ public class ReaderService(IRepository<Reader> readerRepository) : IReaderServic
     {
         ArgumentNullException.ThrowIfNull(reader);
 
-        _readerRepository.Update(reader);
+        Reader updatedReader = _readerRepository.GetById(reader.Id);
+        ArgumentNullException.ThrowIfNull(updatedReader);
+
+        updatedReader.Name = reader.Name;
+        updatedReader.Email = reader.Email;
+        _readerRepository.Update(updatedReader);
     }
 
     public void DeleteReader(int id)

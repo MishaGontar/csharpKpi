@@ -1,0 +1,35 @@
+﻿@model DLL2.Book
+
+<h2>Видалити книгу</h2>
+
+<h3>Ви впевнені, що хочете видалити цю книгу?</h3>
+<div>
+    <h4>Книга:</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Id</dt>
+        <dd>@Model.Id</dd>
+        <dt>Назва</dt>
+        <dd>@Model.Title</dd>
+        <dt>Автор</dt>
+        <dd>@Model.Author</dd>
+        <dt>Тематика</dt>
+        <dd>@Model.Topic</dd>
+        <dt>Кількість</dt>
+        <dd>@Model.Quantity</dd>
+    </dl>
+
+    @using (Html.BeginForm("DeleteConfirmed", "Book", new { id = Model.Id }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Видалити" class="btn btn-danger" />
+                </div>
+            </div>
+        }
+</div>
+<div>
+    @Html.ActionLink("Повернутися до списку", "Index")
+</div>

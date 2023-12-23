@@ -1,0 +1,25 @@
+﻿@model List<DLL2.Reader>
+
+<h2>Пошуку за Email</h2>
+<form method="get" action="@Url.Action("SearchByEmail", "Reader")">
+    <label for="searchEmail">Email:</label>
+    <input type="text" id="searchEmail" name="email"/>
+    <button type="submit" class="btn btn-primary">Пошук</button>
+</form>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Ім'я</th>
+        <th>Email</th>
+        <th>Кількість книг</th>
+    </tr>
+    @foreach (var reader in Model)
+    {
+        <tr>
+            <td>@reader.Id</td>
+            <td>@reader.Name</td>
+            <td>@reader.Email</td>
+            <td>@reader.GetsBooks.Count</td>
+        </tr>
+    }
+</table>
