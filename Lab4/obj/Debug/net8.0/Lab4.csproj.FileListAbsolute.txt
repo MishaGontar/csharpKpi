@@ -38,3 +38,8 @@ C:\Users\Мішаня\RiderProjects\netFramework8\Lab4\bin\Debug\net8.0\BLL.pdb
 C:\Users\Мішаня\RiderProjects\netFramework8\Lab4\bin\Debug\net8.0\DLL.pdb
 C:\Users\Мішаня\RiderProjects\netFramework8\Lab4\obj\Debug\net8.0\Lab4.csproj.AssemblyReference.cache
 C:\Users\Мішаня\RiderProjects\netFramework8\Lab4\obj\Debug\net8.0\Lab4.csproj.CopyComplete
+C:\Users\Мішаня\RiderProjects\netFramework8\Lab4\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\Мішаня\RiderProjects\netFramework8\Lab4\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Мішаня\RiderProjects\netFramework8\Lab4\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Мішаня\RiderProjects\netFramework8\Lab4\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Мішаня\RiderProjects\netFramework8\Lab4\obj\Debug\net8.0\Lab4.MvcApplicationPartsAssemblyInfo.cs

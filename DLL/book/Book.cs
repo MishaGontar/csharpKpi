@@ -1,4 +1,6 @@
-﻿namespace DLL2;
+﻿using System.Text.Json.Serialization;
+
+namespace DLL2;
 
 public class Book
 {
@@ -8,5 +10,5 @@ public class Book
     public string Topic { get; set; }
     public int Quantity { get; set; }
 
-    public ICollection<Reader> Readers { get; set; } = new List<Reader>();
+    [JsonIgnore] public ICollection<Reader> Readers { get; set; } = new List<Reader>();
 }

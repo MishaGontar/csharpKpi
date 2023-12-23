@@ -32,6 +32,7 @@ public class BookService(IRepository<Book> bookRepository) : IBookService
         ArgumentNullException.ThrowIfNull(updatedBook);
 
         updatedBook.Topic = book.Topic;
+        updatedBook.Title = book.Title;
         updatedBook.Quantity = book.Quantity;
         updatedBook.Author = book.Author;
 
