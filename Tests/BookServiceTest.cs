@@ -1,4 +1,4 @@
-using BLL;
+﻿using BLL;
 using DLL2;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -7,10 +7,9 @@ using Assert = NUnit.Framework.Assert;
 namespace TestLab3;
 
 [TestClass]
-public class TestLab3
+public class BookServiceTest
 {
     private IBookService bookService;
-    private IReaderService readerService;
 
     [TestInitialize]
     public void Setup()
@@ -20,18 +19,12 @@ public class TestLab3
             .Options;
 
         LibraryContext context = new LibraryContext(options);
-
-        IRepository<Book> bookRepository = new BookRepository(context);
-        IRepository<Reader> readerRepository = new ReaderRepository(context);
-
-        bookService = new BookService(bookRepository);
-        readerService = new ReaderService(readerRepository);
-
         context.Database.EnsureDeleted();
+        bookService = new BookService(new BookRepository(context));
     }
 
     [TestMethod]
-    public void GetAllBooks_ReturnsAllBooks()
+    public void GetAllBooks()
     {
         bookService.AddBook(new Book { Title = "Book1", Author = "Author1", Topic = "Topic1" });
         bookService.AddBook(new Book { Title = "Book2", Author = "Author2", Topic = "Topic2" });
@@ -43,7 +36,7 @@ public class TestLab3
     }
 
     [TestMethod]
-    public void GetBookById_ValidId_ReturnsBook()
+    public void GetBookById()
     {
         var book = new Book { Title = "Book1", Author = "Author1", Topic = "Topic1" };
         bookService.AddBook(book);
@@ -52,30 +45,6 @@ public class TestLab3
 
         Assert.IsNotNull(result);
         Assert.That(result.Id, Is.EqualTo(book.Id));
-    }
-
-    [TestMethod]
-    public void GetAllReaders_ReturnsAllReaders()
-    {
-        readerService.AddReader(new Reader { Name = "Reader1", Email = "reader1@example.com" });
-        readerService.AddReader(new Reader { Name = "Reader2", Email = "reader2@example.com" });
-
-        var result = readerService.GetAllReaders();
-
-        Assert.IsNotNull(result);
-        Assert.That(result.Count, Is.EqualTo(2));
-    }
-
-    [TestMethod]
-    public void GetReaderById_ValidId_ReturnsReader()
-    {
-        var reader = new Reader { Name = "Reader1", Email = "reader1@example.com" };
-        readerService.AddReader(reader);
-
-        var result = readerService.GetReaderById(reader.Id);
-
-        Assert.IsNotNull(result);
-        Assert.That(result.Id, Is.EqualTo(reader.Id));
     }
 
     [TestMethod]
@@ -157,33 +126,27 @@ public class TestLab3
     }
 
     [TestMethod]
-    public void ReaderGetBooks()
+    public void UpdateBook()
     {
-        for (int i = 0; i < 12; i++)
-        {
-            bookService.AddBook(new Book { Title = "Book" + i, Author = "Author" + i, Topic = "Topic" + i });
-        }
+        var newTitle = "Updated title";
+        var newAuthor = "Updated author";
+        var newTopic = "Updated topic";
 
-        List<Book> foundBooks = bookService.GetAllBooks();
-        Assert.IsNotNull(foundBooks);
-        Assert.That(foundBooks.Count, Is.EqualTo(12));
+        Book book = new Book { Title = "Book1", Author = "Author1", Topic = "Topic1" };
+        bookService.AddBook(book);
 
-        Reader reader = new Reader { Name = "Name", Email = "test@gmail.com" };
-        readerService.AddReader(reader);
+        var updatedBook = bookService.GetBookById(book.Id);
+        Assert.IsNotNull(updatedBook);
 
-        var readers = readerService.GetAllReaders();
-        Assert.IsNotNull(readers);
-        Assert.That(readers.Count, Is.EqualTo(1));
-        Assert.That(reader.GetsBooks.Count, Is.EqualTo(0));
+        updatedBook.Title = newTitle;
+        updatedBook.Author = newAuthor;
+        updatedBook.Topic = newTopic;
 
-        for (int i = 0; i < 10; i++)
-        {
-            readerService.getBook(foundBooks[i], reader);
-        }
+        bookService.UpdateBook(updatedBook);
+        var result = bookService.GetBookById(updatedBook.Id);
 
-        Assert.That(reader.GetsBooks.Count, Is.EqualTo(10));
-
-        Assert.Throws<AlreadyGetBook>(() => readerService.getBook(foundBooks[0], reader));
-        Assert.Throws<MoreThanCan>(() => readerService.getBook(foundBooks[11], reader));
+        Assert.That(result.Title, Is.EqualTo(newTitle));
+        Assert.That(result.Author, Is.EqualTo(newAuthor));
+        Assert.That(result.Topic, Is.EqualTo(newTopic));
     }
 }

@@ -48,6 +48,9 @@ public class ConsoleUI(IBookService bookService, IReaderService readerService)
                 case "9":
                     getBook();
                     break;
+                case "10":
+                    removeBook();
+                    break;
                 case "Q":
                 case "q":
                     Console.WriteLine("Вихід з програми. До побачення!");
@@ -71,6 +74,7 @@ public class ConsoleUI(IBookService bookService, IReaderService readerService)
         Console.WriteLine("7. Показати всіх читачів");
         Console.WriteLine("8. Додати читача");
         Console.WriteLine("9. Додати книжку читачу");
+        Console.WriteLine("10. Видалити книжку читачу");
         Console.WriteLine("Q. Вийти");
         Console.Write("Введіть число : ");
     }
@@ -196,6 +200,19 @@ public class ConsoleUI(IBookService bookService, IReaderService readerService)
         int idBook = Convert.ToInt32(Console.ReadLine());
         Book book = _bookService.GetBookById(idBook);
 
-        _readerService.getBook(book, reader);
+        _readerService.GetBook(book, reader);
+    }
+
+    private void removeBook()
+    {
+        Console.Write("\nВведіть id читача: ");
+        int idReader = Convert.ToInt32(Console.ReadLine());
+        Reader reader = _readerService.GetReaderById(idReader);
+
+        Console.Write("\nВведіть id книжки: ");
+        int idBook = Convert.ToInt32(Console.ReadLine());
+        Book book = _bookService.GetBookById(idBook);
+
+        _readerService.GiveBackBook(book, reader);
     }
 }

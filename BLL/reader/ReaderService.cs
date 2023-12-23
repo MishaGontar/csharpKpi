@@ -58,19 +58,37 @@ public class ReaderService(IRepository<Reader> readerRepository) : IReaderServic
     }
 
 
-    public void getBook(Book book, Reader reader)
+    public void GetBook(Book book, Reader reader)
     {
         ArgumentNullException.ThrowIfNull(book);
         ArgumentNullException.ThrowIfNull(reader);
 
         bool isAlreadyExist = reader.GetsBooks.Any(b =>
             b.Title.Equals(book.Title) && b.Author.Equals(book.Author) && b.Topic.Equals(book.Topic));
+
         if (isAlreadyExist)
             throw new AlreadyGetBook();
         if (reader.GetsBooks.Count == 10)
             throw new MoreThanCan();
+        if (book.Quantity == 0)
+            throw new NoMoreInstance();
 
         reader.GetsBooks.Add(book);
+        book.Quantity -= 1;
         Console.WriteLine("Книжку було додано до формулятора.");
+    }
+
+    public void GiveBackBook(Book book, Reader reader)
+    {
+        ArgumentNullException.ThrowIfNull(book);
+        ArgumentNullException.ThrowIfNull(reader);
+
+        var foundBook = reader.GetsBooks.Find(b =>
+            b.Title.Equals(book.Title) && b.Author.Equals(book.Author) && b.Topic.Equals(book.Topic));
+        if (foundBook == null)
+            throw new NotFoundBook();
+
+        reader.GetsBooks.Remove(book);
+        Console.WriteLine("Книжку було видалено з формулятора.");
     }
 }
