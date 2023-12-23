@@ -31,7 +31,7 @@ class Program
         bookService.AddBook(new Book { Title = "Назва 1", Author = "Автор 1", Topic = "Тематика 1", Quantity = 5 });
         bookService.AddBook(new Book { Title = "Назва 2", Author = "Автор 2", Topic = "Тематика 1", Quantity = 1 });
         bookService.AddBook(new Book { Title = "Назва 3", Author = "Автор 2", Topic = "Тематика 2", Quantity = 0 });
-        bookService.AddBook(new Book { Title = "Назва 4", Author = "Автор 3", Topic = "Тематика 3", Quantity = 10 });
+        bookService.AddBook(new Book { Title = "Назва 4", Author = "Автор 3", Topic = "Тематика 3", Quantity = 10});
 
         readerService.AddReader(new Reader { Name = "Читач 1", Email = "email 1" });
         readerService.AddReader(new Reader { Name = "Читач 2", Email = "email 2" });

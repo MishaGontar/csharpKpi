@@ -89,6 +89,7 @@ public class ReaderService(IRepository<Reader> readerRepository) : IReaderServic
             throw new NotFoundBook();
 
         reader.GetsBooks.Remove(book);
+        book.Quantity += 1;
         Console.WriteLine("Книжку було видалено з формулятора.");
     }
 }

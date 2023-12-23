@@ -87,7 +87,7 @@ public class ConsoleUI(IBookService bookService, IReaderService readerService)
 
         foreach (var book in allBooks)
         {
-            Console.WriteLine($"Id: {book.Id} Назва: {book.Title}, Автор: {book.Author}, Тематика: {book.Topic}");
+            Console.WriteLine($"Id: {book.Id} Назва: {book.Title}, Автор: {book.Author}, Тематика: {book.Topic} Кількість: {book.Quantity}");
         }
     }
 
