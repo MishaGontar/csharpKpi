@@ -4,15 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Lab4.Controllers;
 
-public class BookController : Controller
+public class BookController(IBookService bookService) : Controller
 {
-    private readonly IBookService _bookService;
-
-    public BookController(IBookService bookService)
-    {
-        _bookService = bookService ?? throw new ArgumentNullException(nameof(bookService));
-    }
-
+    private readonly IBookService _bookService = bookService ?? throw new ArgumentNullException(nameof(bookService));
+    
     public ActionResult Index()
     {
         List<Book> allBooks = _bookService.GetAllBooks();
