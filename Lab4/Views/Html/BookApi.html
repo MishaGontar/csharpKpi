@@ -1,0 +1,312 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book API Example</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body class="container mt-5">
+
+<h1 class="mb-4">Book API Example</h1>
+
+<!-- GET All Books -->
+<div class="card">
+    <h2>Отримати всі книжки</h2>
+    <button id="getAllBooks" class="btn btn-primary mb-2">Отримати всі книжки</button>
+    <div id="allBooksResult" class="mb-4"></div>
+</div>
+
+<!-- GET Book by ID -->
+<div class="card">
+    <h2>Отримати книгу по ID</h2>
+    <div class="input-group mb-2">
+        <input type="number" id="bookId" class="form-control" placeholder="Введіть ID книги">
+        <div class="input-group-append">
+            <button id="getBookById" class="btn btn-info">Отримати книгу по ID</button>
+        </div>
+    </div>
+    <div id="getBookByIdResult" class="mb-4"></div>
+</div>
+
+<!-- POST Create Book -->
+<div class="card">
+    <h2>Створити книгу</h2>
+    <form id="createBookForm" class="mb-4">
+        <div class="form-group">
+            <label for="titleInput">Назва:</label>
+            <input type="text" id="titleInput" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="authorInput">Автор:</label>
+            <input type="text" id="authorInput" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="topicInput">Тема:</label>
+            <input type="text" id="topicInput" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="quantityInput">Кількість:</label>
+            <input type="number" id="quantityInput" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-success">Створити книгу</button>
+    </form>
+</div>
+
+<!-- PUT Update Book -->
+<div class="card">
+    <h2>Оновити книгу</h2>
+    <form id="updateBookForm" class="mb-4">
+        <div class="form-group">
+            <label for="bookIdInputUpdate">ID книги:</label>
+            <input type="number" id="bookIdInputUpdate" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="titleInputUpdate">Назва:</label>
+            <input type="text" id="titleInputUpdate" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="authorInputUpdate">Автор:</label>
+            <input type="text" id="authorInputUpdate" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="topicInputUpdate">Тема:</label>
+            <input type="text" id="topicInputUpdate" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="quantityInputUpdate">Кількість:</label>
+            <input type="number" id="quantityInputUpdate" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-warning">Оновити книгу</button>
+    </form>
+</div>
+
+<!-- DELETE Book -->
+<div class="card">
+    <h2>Видалити книгу</h2>
+    <div class="input-group mb-2">
+        <input type="number" id="deleteBookId" class="form-control" placeholder="Enter Book ID">
+        <div class="input-group-append">
+            <button id="deleteBook" class="btn btn-danger">Видалити книгу</button>
+        </div>
+    </div>
+    <div id="deleteBookResult" class="mb-4"></div>
+</div>
+
+<!-- Search by Title -->
+<div class="card">
+    <h2>Шукати книгу по назві</h2>
+    <div class="input-group mb-2">
+        <input type="text" id="searchTitle" class="form-control" placeholder="Введіть назву книги">
+        <div class="input-group-append">
+            <button id="searchByTitle" class="btn btn-info">Шукати книгу по назві</button>
+        </div>
+    </div>
+    <div id="searchByTitleResult" class="mb-4"></div>
+</div>
+
+<!-- Search by Author -->
+<div class="card">
+    <h2>Шукати книгу по автору</h2>
+    <div class="input-group mb-2">
+        <input type="text" id="searchAuthor" class="form-control" placeholder="Введіть автора книги">
+        <div class="input-group-append">
+            <button id="searchByAuthor" class="btn btn-info">Шукати книгу по автору</button>
+        </div>
+    </div>
+    <div id="searchByAuthorResult" class="mb-4"></div>
+</div>
+
+<!-- Search by Topic -->
+<div class="card">
+    <h2>Шукати книгу по тематиці</h2>
+    <div class="input-group mb-2">
+        <input type="text" id="searchTopic" class="form-control" placeholder="Введіть тематику книги">
+        <div class="input-group-append">
+            <button id="searchByTopic" class="btn btn-info">Шукати книгу по тематиці</button>
+        </div>
+    </div>
+    <div id="searchByTopicResult" class="mb-4"></div>
+</div>
+
+<script>
+    // Define the API endpoint
+    const apiUrl = 'http://localhost:5097/api/BookApi';
+
+    // Attach click event handlers to buttons
+    $(document).ready(function () {
+
+        // GET All Books
+        $('#getAllBooks').click(function () {
+            makeGetRequest('', data => displayBooksAsTable(data, '#allBooksResult'));
+        });
+
+        // GET Book by ID
+        $('#getBookById').click(function () {
+            const bookId = $('#bookId').val();
+            makeGetRequest(bookId, data => displayBookAsTable(data));
+        });
+
+        // POST Create Book
+        $('#createBookForm').submit(function (event) {
+            event.preventDefault();
+
+            const bookData = {
+                Title: $('#titleInput').val(),
+                Author: $('#authorInput').val(),
+                Topic: $('#topicInput').val(),
+                Quantity: parseInt($('#quantityInput').val()) 
+            };
+
+            $.ajax({
+                url: 'http://localhost:5097/api/BookApi',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(bookData),
+                success: data => console.log('Book created successfully:', data),
+                error: (_, __, errorThrown) => console.error('Error creating book:', errorThrown)
+            });
+        });
+
+        // PUT Update Book
+        $('#updateBookForm').submit(function (event) {
+            event.preventDefault();
+
+            const bookIdToUpdate = $('#bookIdInputUpdate').val();
+
+            const bookData = {
+                Id: bookIdToUpdate,
+                Title: $('#titleInputUpdate').val(),
+                Author: $('#authorInputUpdate').val(),
+                Topic: $('#topicInputUpdate').val(),
+                Quantity: parseInt($('#quantityInputUpdate').val())
+            };
+
+            $.ajax({
+                url: 'http://localhost:5097/api/BookApi/' + bookIdToUpdate,
+                type: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify(bookData),
+                success: data => console.log('Book updated successfully:', data),
+                error: (__, _, errorThrown) => console.error('Error updating book:', errorThrown)
+            });
+        });
+
+        // DELETE Book
+        $('#deleteBook').click(function () {
+            const deleteBookId = $('#deleteBookId').val();
+            makeDeleteRequest(deleteBookId,
+                data => $('#deleteBookResult').text(JSON.stringify(data)));
+        });
+
+        // Search by Title
+        $('#searchByTitle').click(function () {
+            const searchTitle = $('#searchTitle').val();
+            makeGetRequest('SearchByTitle?title=' + searchTitle,
+                data => displayBooksAsTable(data, '#searchByTitleResult'));
+        });
+
+        // Search by Author
+        $('#searchByAuthor').click(function () {
+            const searchAuthor = $('#searchAuthor').val();
+            makeGetRequest('SearchByAuthor?author=' + searchAuthor,
+                data => displayBooksAsTable(data, '#searchByAuthorResult'));
+        });
+
+        // Search by Topic
+        $('#searchByTopic').click(function () {
+            const searchTopic = $('#searchTopic').val();
+            makeGetRequest('SearchByTopic?topic=' + searchTopic,
+                data => displayBooksAsTable(data, '#searchByTopicResult'));
+        });
+    });
+
+    // Function to make a GET request to the API
+    function makeGetRequest(endpoint, callback) {
+        $.get(apiUrl + '/' + endpoint, callback);
+    }
+
+    // Function to make a DELETE request to the API
+    function makeDeleteRequest(endpoint, callback) {
+        $.ajax({
+            url: apiUrl + '/' + endpoint,
+            type: 'DELETE',
+            success: callback
+        });
+    }
+
+    function displayBooksAsTable(books, element) {
+        const tableHtml = `
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Назва</th>
+                        <th>Автор</th>
+                        <th>Тематика</th>
+                        <th>Кількість</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${books.map(book => `            
+                        <tr>
+                            <td>${book.id}</td>
+                            <td>${book.title}</td>
+                            <td>${book.author}</td>
+                            <td>${book.topic}</td>
+                            <td>${book.quantity}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        `;
+        $(element).html(tableHtml);
+    }
+
+    function displayBookAsTable(book) {
+        const tableHtml = `
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Назва</th>
+                        <th>Автор</th>
+                        <th>Тематика</th>
+                        <th>Кількість</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <td>${book.id}</td>
+                            <td>${book.title}</td>
+                            <td>${book.author}</td>
+                            <td>${book.topic}</td>
+                            <td>${book.quantity}</td>
+                        </tr>
+                </tbody>
+            </table>
+        `;
+        $('#getBookByIdResult').html(tableHtml);
+    }
+</script>
+
+</body>
+</html>

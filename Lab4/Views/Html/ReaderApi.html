@@ -1,0 +1,361 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reader API Example</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body class="container mt-5">
+
+<h1 class="mb-4">Reader API Example</h1>
+
+<!-- GET All Readers -->
+<div class="card">
+    <h2>Отримати всіх читачів</h2>
+    <button id="getAllReaders" class="btn btn-primary mb-2">Отримати всіх читачів</button>
+    <div id="allReadersResult" class="mb-4"></div>
+</div>
+
+<!-- GET Reader by ID -->
+<div class="card">
+    <h2>Отримати читача по ID</h2>
+    <div class="input-group mb-2">
+        <input type="number" id="readerId" class="form-control" placeholder="Введіть ID читача">
+        <div class="input-group-append">
+            <button id="getReaderById" class="btn btn-info">Отримати читача по ID</button>
+        </div>
+    </div>
+    <div id="getReaderByIdResult" class="mb-4"></div>
+</div>
+
+<!-- POST Create Reader -->
+<div class="card">
+    <h2>Створити читача</h2>
+    <form id="createReaderForm" class="mb-4">
+        <div class="form-group">
+            <label for="nameInput">Ім'я:</label>
+            <input type="text" id="nameInput" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="emailInput">Email:</label>
+            <input type="text" id="emailInput" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-success">Створити читача</button>
+    </form>
+</div>
+
+<!-- PUT Update Reader -->
+<div class="card">
+    <h2>Оновити читача</h2>
+    <form id="updateReaderForm" class="mb-4">
+        <div class="form-group">
+            <label for="readerIdInputUpdate">ID читача:</label>
+            <input type="number" id="readerIdInputUpdate" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="nameInputUpdate">Ім'я:</label>
+            <input type="text" id="nameInputUpdate" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="emailInputUpdate">Email:</label>
+            <input type="text" id="emailInputUpdate" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-warning">Оновити читача</button>
+    </form>
+</div>
+
+<!-- DELETE Reader -->
+<div class="card">
+    <h2>Видалити читача</h2>
+    <div class="input-group mb-2">
+        <input type="number" id="deleteReaderId" class="form-control" placeholder="Введіть ID читача">
+        <div class="input-group-append">
+            <button id="deleteReader" class="btn btn-danger">Видалити читача</button>
+        </div>
+    </div>
+    <div id="deleteReaderResult" class="mb-4"></div>
+</div>
+
+<!-- Search Readers by Name -->
+<div class="card">
+    <h2>Шукати читача по імені</h2>
+    <div class="input-group mb-2">
+        <input type="text" id="searchReaderName" class="form-control" placeholder="Введіть ім'я">
+        <div class="input-group-append">
+            <button id="searchReadersByName" class="btn btn-info">Шукати читача по імені</button>
+        </div>
+    </div>
+    <div id="searchReadersByNameResult" class="mb-4"></div>
+</div>
+
+<!-- Search Readers by Email -->
+<div class="card">
+    <h2>Шукати читача по Email</h2>
+    <div class="input-group mb-2">
+        <input type="text" id="searchReaderEmail" class="form-control" placeholder="Введіть Email">
+        <div class="input-group-append">
+            <button id="searchReadersByEmail" class="btn btn-info">Шукати читача по Email</button>
+        </div>
+    </div>
+    <div id="searchReadersByEmailResult" class="mb-4"></div>
+</div>
+
+<!-- Get Book for Reader -->
+<div class="card">
+    <h2>Взяти книгу</h2>
+    <div class="input-group mb-2">
+        <input type="number" id="getBookReaderId" class="form-control" placeholder="Введіть ID читача">
+        <input type="number" id="getBookId" class="form-control" placeholder="Введіть ID книги">
+        <div class="input-group-append">
+            <button id="getBookForReader" class="btn btn-success">Взяти книгу</button>
+        </div>
+    </div>
+    <div id="getBookForReaderResult" class="mb-4"></div>
+</div>
+
+<!-- Give Back Book -->
+<div class="card">
+    <h2>Повернути книгу</h2>
+    <div class="input-group mb-2">
+        <input type="number" id="giveBackReaderId" class="form-control" placeholder="Введіть ID читача">
+        <input type="number" id="giveBackBookId" class="form-control" placeholder="Введіть ID книги">
+        <div class="input-group-append">
+            <button id="giveBackBook" class="btn btn-success">Повернути книгу</button>
+        </div>
+    </div>
+    <div id="giveBackBookResult" class="mb-4"></div>
+</div>
+
+<script>
+    // Define the API endpoint
+    const apiUrl = 'http://localhost:5097/api/ReaderApi';
+    
+    // Attach click event handlers to buttons
+    $(document).ready(function () {
+
+        // GET All Readers
+        $('#getAllReaders').click(function () {
+            makeGetRequest('', function (data) {
+                displayReadersAsTable(data, '#allReadersResult');
+            });
+        });
+
+        // GET Reader by ID
+        $('#getReaderById').click(function () {
+            const readerId = $('#readerId').val();
+            makeGetRequest('' + readerId, function (data) {
+                displayReaderResult(data);
+            });
+        });
+
+        // POST Create Reader
+        $('#createReaderForm').submit(function (event) {
+            event.preventDefault();
+
+            const readerData = {
+                Name: $('#nameInput').val(),
+                Email: $('#emailInput').val()
+            };
+
+            createReader(readerData);
+        });
+
+        // PUT Update Reader
+        $('#updateReaderForm').submit(function (event) {
+            event.preventDefault();
+
+            const readerId = $('#readerIdInputUpdate').val();
+            const name = $('#nameInputUpdate').val();
+            const email = $('#emailInputUpdate').val();
+
+            const readerData = {
+                Id: parseInt(readerId),
+                Name: name,
+                Email: email
+            };
+
+            makePutRequest(readerId, readerData, function () {
+                console.log('Reader updated successfully');
+            });
+        });
+
+        // DELETE Reader
+        $('#deleteReader').click(function () {
+            const readerId = $('#deleteReaderId').val();
+            makeDeleteRequest('' + readerId);
+        });
+
+        // Search Readers by Name
+        $('#searchReadersByName').click(function () {
+            const name = $('#searchReaderName').val();
+            makeGetRequest('searchByName?name=' + name, function (data) {
+                displayReadersAsTable(data, '#searchReadersByNameResult');
+            });
+        });
+
+        // Search Readers by Email
+        $('#searchReadersByEmail').click(function () {
+            const email = $('#searchReaderEmail').val();
+            makeGetRequest('searchByEmail?email=' + email, function (data) {
+                displayReadersAsTable(data, '#searchReadersByEmailResult');
+            });
+        });
+
+        // Get Book for Reader
+        $('#getBookForReader').click(function () {
+            const readerId = $('#getBookReaderId').val();
+            const bookId = $('#getBookId').val();
+
+            const apiUrl =
+                `http://localhost:5097/api/ReaderApi/getBook?readerId=${readerId}&bookId=${bookId}`;
+            $.post(apiUrl)
+        });
+
+        // Give Back Book
+        $('#giveBackBook').click(function () {
+            const readerId = $('#giveBackReaderId').val();
+            const bookId = $('#giveBackBookId').val();
+
+            const apiUrl = `http://localhost:5097/api/ReaderApi/giveBackBook?readerId=${readerId}&bookId=${bookId}`;
+            $.post(apiUrl, handleBookRetrieval, 'json')
+                .fail(xhr => console.error(xhr.responseText));
+        });
+
+    });
+
+    // Function to make a GET request to the API
+    function makeGetRequest(endpoint, callback) {
+        $.get(apiUrl + '/' + endpoint, callback);
+    }
+
+    // Function to make a DELETE request to the API
+    function makeDeleteRequest(endpoint, callback) {
+        $.ajax({
+            url: apiUrl + '/' + endpoint,
+            type: 'DELETE',
+            success: callback
+        });
+    }
+
+    function makePutRequest(endpoint, data, callback) {
+        $.ajax({
+            url: apiUrl + '/' + endpoint,
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: callback,
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    // Function to make a POST request to create a reader
+    function createReader(readerData) {
+        $.ajax({
+            url: 'http://localhost:5097/api/ReaderApi',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(readerData),
+            success: function (data, textStatus, xhr) {
+                console.log('Reader created successfully:', data);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.error('Error creating reader:', errorThrown);
+            }
+        });
+    }
+
+    function handleBookRetrieval(data) {
+        console.log('Книгу успішно повернуто');
+        $('#giveBackBookResult').text('Книгу успішно повернуто');
+    }
+
+    // Function to display readers as a table
+    function displayReadersAsTable(readers, element) {
+        console.log(readers)
+        const tableHtml = `
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Ім'я</th>
+                            <th>Email</th>
+                            <th>Кількість взятих книжок</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${readers.map(reader =>
+            `
+                            <tr>
+                                <td>${reader.id}</td>
+                                <td>${reader.name}</td>
+                                <td>${reader.email}</td>
+                                <td>${reader.getsBooks.length}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        $(element).html(tableHtml);
+    }
+
+    // Function to display a single reader result
+    function displayReaderResult(reader) {
+        const resultHtml = `
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">Читач ID: ${reader.id}</h5>
+            <p class="card-text">Ім'я: ${reader.name}</p>
+            <p class="card-text">Email: ${reader.email}</p>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">Книги, які взяв читач:</h5>
+            <table class="table table-bordered table-striped mt-2">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Назва</th>
+                        <th>Автор</th>
+                        <th>Тематика</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${reader.getsBooks.map(book =>
+            `
+                        <tr>
+                            <td>${book.id}</td>
+                            <td>${book.title}</td>
+                            <td>${book.author}</td>
+                            <td>${book.topic}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        </div>
+    </div>
+`;
+        $('#getReaderByIdResult').html(resultHtml);
+    }
+
+</script>
+</body>
+</html>
